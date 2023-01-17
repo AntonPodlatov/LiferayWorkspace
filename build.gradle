@@ -1,6 +1,5 @@
 dependencies {
-    implementation 'com.liferay.portal:com.liferay.portal.kernel:92.2.0'
-    implementation 'com.liferay:com.liferay.portal.upgrade.dao.orm:1.0.7'
+
 }
 
 repositories {

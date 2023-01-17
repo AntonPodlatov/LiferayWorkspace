@@ -1,4 +1,12 @@
 dependencies {
+    compileOnly group: "com.liferay", name: "com.liferay.item.selector.api"
+    compileOnly group: "com.liferay", name: "com.liferay.item.selector.web"
+    compileOnly group: "com.liferay", name: "com.liferay.item.selector.criteria.api"
+    compileOnly group: "com.liferay", name: "com.liferay.item.selector.taglib"
+    compileOnly group: "com.liferay", name: "com.liferay.item.selector.taglib"
+    compileOnly group: 'com.liferay', name: 'com.liferay.frontend.taglib'
+
+
     compileOnly group: 'com.liferay', name: 'com.liferay.frontend.taglib.clay'
     compileOnly group: 'com.liferay', name: 'com.liferay.petra.function'
 
