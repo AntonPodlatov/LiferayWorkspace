@@ -1,11 +1,11 @@
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
- * <p>
+ *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation; either version 2.1 of the License, or (at your option)
  * any later version.
- * <p>
+ *
  * This library is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
@@ -67,452 +67,547 @@ import org.osgi.service.component.annotations.Reference;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @generated
  * @see com.liferay.training.gradebook.service.impl.AssignmentLocalServiceImpl
+ * @generated
  */
-public abstract class AssignmentLocalServiceBaseImpl extends BaseLocalServiceImpl implements AopService, AssignmentLocalService, IdentifiableOSGiService {
+public abstract class AssignmentLocalServiceBaseImpl
+	extends BaseLocalServiceImpl
+	implements AopService, AssignmentLocalService, IdentifiableOSGiService {
 
-    /*
-     * NOTE FOR DEVELOPERS:
-     *
-     * Never modify or reference this class directly. Use <code>AssignmentLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>AssignmentLocalServiceUtil</code>.
-     */
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. Use <code>AssignmentLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>AssignmentLocalServiceUtil</code>.
+	 */
 
-    /**
-     * Adds the assignment to the database. Also notifies the appropriate model listeners.
-     *
-     * <p>
-     * <strong>Important:</strong> Inspect AssignmentLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
-     * </p>
-     *
-     * @param assignment the assignment
-     * @return the assignment that was added
-     */
-    @Indexable(type = IndexableType.REINDEX)
-    @Override
-    public Assignment addAssignment(Assignment assignment) {
-        assignment.setNew(true);
-        return assignmentPersistence.update(assignment);
-    }
+	/**
+	 * Adds the assignment to the database. Also notifies the appropriate model listeners.
+	 *
+	 * <p>
+	 * <strong>Important:</strong> Inspect AssignmentLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
+	 * </p>
+	 *
+	 * @param assignment the assignment
+	 * @return the assignment that was added
+	 */
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public Assignment addAssignment(Assignment assignment) {
+		assignment.setNew(true);
 
-    /**
-     * Creates a new assignment with the primary key. Does not add the assignment to the database.
-     *
-     * @param assignmentId the primary key for the new assignment
-     * @return the new assignment
-     */
-    @Override
-    @Transactional(enabled = false)
-    public Assignment createAssignment(long assignmentId) {
-        return assignmentPersistence.create(assignmentId);
-    }
+		return assignmentPersistence.update(assignment);
+	}
 
-    /**
-     * Deletes the assignment with the primary key from the database. Also notifies the appropriate model listeners.
-     *
-     * <p>
-     * <strong>Important:</strong> Inspect AssignmentLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
-     * </p>
-     *
-     * @param assignmentId the primary key of the assignment
-     * @return the assignment that was removed
-     * @throws PortalException if a assignment with the primary key could not be found
-     */
-    @Indexable(type = IndexableType.DELETE)
-    @Override
-    public Assignment deleteAssignment(long assignmentId) throws PortalException {
-        return assignmentPersistence.remove(assignmentId);
-    }
+	/**
+	 * Creates a new assignment with the primary key. Does not add the assignment to the database.
+	 *
+	 * @param assignmentId the primary key for the new assignment
+	 * @return the new assignment
+	 */
+	@Override
+	@Transactional(enabled = false)
+	public Assignment createAssignment(long assignmentId) {
+		return assignmentPersistence.create(assignmentId);
+	}
 
-    /**
-     * Deletes the assignment from the database. Also notifies the appropriate model listeners.
-     *
-     * <p>
-     * <strong>Important:</strong> Inspect AssignmentLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
-     * </p>
-     *
-     * @param assignment the assignment
-     * @return the assignment that was removed
-     */
-    @Indexable(type = IndexableType.DELETE)
-    @Override
-    public Assignment deleteAssignment(Assignment assignment) {
-        return assignmentPersistence.remove(assignment);
-    }
+	/**
+	 * Deletes the assignment with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * <p>
+	 * <strong>Important:</strong> Inspect AssignmentLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
+	 * </p>
+	 *
+	 * @param assignmentId the primary key of the assignment
+	 * @return the assignment that was removed
+	 * @throws PortalException if a assignment with the primary key could not be found
+	 */
+	@Indexable(type = IndexableType.DELETE)
+	@Override
+	public Assignment deleteAssignment(long assignmentId)
+		throws PortalException {
 
-    @Override
-    public DynamicQuery dynamicQuery() {
-        Class<?> clazz = getClass();
-        return DynamicQueryFactoryUtil.forClass(Assignment.class, clazz.getClassLoader());
-    }
+		return assignmentPersistence.remove(assignmentId);
+	}
 
-    /**
-     * Performs a dynamic query on the database and returns the matching rows.
-     *
-     * @param dynamicQuery the dynamic query
-     * @return the matching rows
-     */
-    @Override
-    public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
-        return assignmentPersistence.findWithDynamicQuery(dynamicQuery);
-    }
+	/**
+	 * Deletes the assignment from the database. Also notifies the appropriate model listeners.
+	 *
+	 * <p>
+	 * <strong>Important:</strong> Inspect AssignmentLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
+	 * </p>
+	 *
+	 * @param assignment the assignment
+	 * @return the assignment that was removed
+	 */
+	@Indexable(type = IndexableType.DELETE)
+	@Override
+	public Assignment deleteAssignment(Assignment assignment) {
+		return assignmentPersistence.remove(assignment);
+	}
 
-    /**
-     * Performs a dynamic query on the database and returns a range of the matching rows.
-     *
-     * <p>
-     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>com.liferay.training.gradebook.model.impl.AssignmentModelImpl</code>.
-     * </p>
-     *
-     * @param dynamicQuery the dynamic query
-     * @param start        the lower bound of the range of model instances
-     * @param end          the upper bound of the range of model instances (not inclusive)
-     * @return the range of matching rows
-     */
-    @Override
-    public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start, int end) {
-        return assignmentPersistence.findWithDynamicQuery(dynamicQuery, start, end);
-    }
+	@Override
+	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
 
-    /**
-     * Performs a dynamic query on the database and returns an ordered range of the matching rows.
-     *
-     * <p>
-     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>com.liferay.training.gradebook.model.impl.AssignmentModelImpl</code>.
-     * </p>
-     *
-     * @param dynamicQuery      the dynamic query
-     * @param start             the lower bound of the range of model instances
-     * @param end               the upper bound of the range of model instances (not inclusive)
-     * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-     * @return the ordered range of matching rows
-     */
-    @Override
-    public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start, int end, OrderByComparator<T> orderByComparator) {
-        return assignmentPersistence.findWithDynamicQuery(dynamicQuery, start, end, orderByComparator);
-    }
+		return DynamicQueryFactoryUtil.forClass(
+			Assignment.class, clazz.getClassLoader());
+	}
 
-    /**
-     * Returns the number of rows matching the dynamic query.
-     *
-     * @param dynamicQuery the dynamic query
-     * @return the number of rows matching the dynamic query
-     */
-    @Override
-    public long dynamicQueryCount(DynamicQuery dynamicQuery) {
-        return assignmentPersistence.countWithDynamicQuery(dynamicQuery);
-    }
+	/**
+	 * Performs a dynamic query on the database and returns the matching rows.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @return the matching rows
+	 */
+	@Override
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
+		return assignmentPersistence.findWithDynamicQuery(dynamicQuery);
+	}
 
-    /**
-     * Returns the number of rows matching the dynamic query.
-     *
-     * @param dynamicQuery the dynamic query
-     * @param projection   the projection to apply to the query
-     * @return the number of rows matching the dynamic query
-     */
-    @Override
-    public long dynamicQueryCount(DynamicQuery dynamicQuery, Projection projection) {
-        return assignmentPersistence.countWithDynamicQuery(dynamicQuery, projection);
-    }
+	/**
+	 * Performs a dynamic query on the database and returns a range of the matching rows.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>com.liferay.training.gradebook.model.impl.AssignmentModelImpl</code>.
+	 * </p>
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
+	 * @return the range of matching rows
+	 */
+	@Override
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end) {
 
-    @Override
-    public Assignment fetchAssignment(long assignmentId) {
-        return assignmentPersistence.fetchByPrimaryKey(assignmentId);
-    }
+		return assignmentPersistence.findWithDynamicQuery(
+			dynamicQuery, start, end);
+	}
 
-    /**
-     * Returns the assignment matching the UUID and group.
-     *
-     * @param uuid    the assignment's UUID
-     * @param groupId the primary key of the group
-     * @return the matching assignment, or <code>null</code> if a matching assignment could not be found
-     */
-    @Override
-    public Assignment fetchAssignmentByUuidAndGroupId(String uuid, long groupId) {
-        return assignmentPersistence.fetchByUUID_G(uuid, groupId);
-    }
+	/**
+	 * Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>com.liferay.training.gradebook.model.impl.AssignmentModelImpl</code>.
+	 * </p>
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching rows
+	 */
+	@Override
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator<T> orderByComparator) {
 
-    /**
-     * Returns the assignment with the primary key.
-     *
-     * @param assignmentId the primary key of the assignment
-     * @return the assignment
-     * @throws PortalException if a assignment with the primary key could not be found
-     */
-    @Override
-    public Assignment getAssignment(long assignmentId) throws PortalException {
-        return assignmentPersistence.findByPrimaryKey(assignmentId);
-    }
+		return assignmentPersistence.findWithDynamicQuery(
+			dynamicQuery, start, end, orderByComparator);
+	}
 
-    @Override
-    public ActionableDynamicQuery getActionableDynamicQuery() {
-        ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
-        actionableDynamicQuery.setBaseLocalService(assignmentLocalService);
-        actionableDynamicQuery.setClassLoader(getClassLoader());
-        actionableDynamicQuery.setModelClass(Assignment.class);
-        actionableDynamicQuery.setPrimaryKeyPropertyName("assignmentId");
-        return actionableDynamicQuery;
-    }
+	/**
+	 * Returns the number of rows matching the dynamic query.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @return the number of rows matching the dynamic query
+	 */
+	@Override
+	public long dynamicQueryCount(DynamicQuery dynamicQuery) {
+		return assignmentPersistence.countWithDynamicQuery(dynamicQuery);
+	}
 
-    @Override
-    public IndexableActionableDynamicQuery
-    getIndexableActionableDynamicQuery() {
-        IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
-        indexableActionableDynamicQuery.setBaseLocalService(assignmentLocalService);
-        indexableActionableDynamicQuery.setClassLoader(getClassLoader());
-        indexableActionableDynamicQuery.setModelClass(Assignment.class);
-        indexableActionableDynamicQuery.setPrimaryKeyPropertyName("assignmentId");
-        return indexableActionableDynamicQuery;
-    }
+	/**
+	 * Returns the number of rows matching the dynamic query.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param projection the projection to apply to the query
+	 * @return the number of rows matching the dynamic query
+	 */
+	@Override
+	public long dynamicQueryCount(
+		DynamicQuery dynamicQuery, Projection projection) {
 
-    protected void initActionableDynamicQuery(ActionableDynamicQuery actionableDynamicQuery) {
-        actionableDynamicQuery.setBaseLocalService(assignmentLocalService);
-        actionableDynamicQuery.setClassLoader(getClassLoader());
-        actionableDynamicQuery.setModelClass(Assignment.class);
-        actionableDynamicQuery.setPrimaryKeyPropertyName("assignmentId");
-    }
+		return assignmentPersistence.countWithDynamicQuery(
+			dynamicQuery, projection);
+	}
 
-    @Override
-    public ExportActionableDynamicQuery getExportActionableDynamicQuery(final PortletDataContext portletDataContext) {
-        final ExportActionableDynamicQuery exportActionableDynamicQuery = new ExportActionableDynamicQuery() {
-            @Override
-            public long performCount() throws PortalException {
-                ManifestSummary manifestSummary = portletDataContext.getManifestSummary();
-                StagedModelType stagedModelType = getStagedModelType();
+	@Override
+	public Assignment fetchAssignment(long assignmentId) {
+		return assignmentPersistence.fetchByPrimaryKey(assignmentId);
+	}
 
-                long modelAdditionCount = super.performCount();
-                manifestSummary.addModelAdditionCount(stagedModelType, modelAdditionCount);
+	/**
+	 * Returns the assignment matching the UUID and group.
+	 *
+	 * @param uuid the assignment's UUID
+	 * @param groupId the primary key of the group
+	 * @return the matching assignment, or <code>null</code> if a matching assignment could not be found
+	 */
+	@Override
+	public Assignment fetchAssignmentByUuidAndGroupId(
+		String uuid, long groupId) {
 
-                long modelDeletionCount = ExportImportHelperUtil.getModelDeletionCount(portletDataContext, stagedModelType);
-                manifestSummary.addModelDeletionCount(stagedModelType, modelDeletionCount);
+		return assignmentPersistence.fetchByUUID_G(uuid, groupId);
+	}
 
-                return modelAdditionCount;
-            }
+	/**
+	 * Returns the assignment with the primary key.
+	 *
+	 * @param assignmentId the primary key of the assignment
+	 * @return the assignment
+	 * @throws PortalException if a assignment with the primary key could not be found
+	 */
+	@Override
+	public Assignment getAssignment(long assignmentId) throws PortalException {
+		return assignmentPersistence.findByPrimaryKey(assignmentId);
+	}
 
-        };
+	@Override
+	public ActionableDynamicQuery getActionableDynamicQuery() {
+		ActionableDynamicQuery actionableDynamicQuery =
+			new DefaultActionableDynamicQuery();
 
-        initActionableDynamicQuery(exportActionableDynamicQuery);
+		actionableDynamicQuery.setBaseLocalService(assignmentLocalService);
+		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Assignment.class);
 
-        exportActionableDynamicQuery.setAddCriteriaMethod(
-                dynamicQuery -> portletDataContext.addDateRangeCriteria(dynamicQuery, "modifiedDate"));
+		actionableDynamicQuery.setPrimaryKeyPropertyName("assignmentId");
 
-        exportActionableDynamicQuery.setCompanyId(portletDataContext.getCompanyId());
+		return actionableDynamicQuery;
+	}
 
-        exportActionableDynamicQuery.setPerformActionMethod(
-                (ActionableDynamicQuery.PerformActionMethod<Assignment>)
-                        assignment -> StagedModelDataHandlerUtil.exportStagedModel(portletDataContext, assignment));
+	@Override
+	public IndexableActionableDynamicQuery
+		getIndexableActionableDynamicQuery() {
 
-        exportActionableDynamicQuery.setStagedModelType(
-                new StagedModelType(PortalUtil.getClassNameId(Assignment.class.getName())));
+		IndexableActionableDynamicQuery indexableActionableDynamicQuery =
+			new IndexableActionableDynamicQuery();
 
-        return exportActionableDynamicQuery;
-    }
+		indexableActionableDynamicQuery.setBaseLocalService(
+			assignmentLocalService);
+		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(Assignment.class);
 
-    /**
-     * @throws PortalException
-     */
-    public PersistedModel createPersistedModel(Serializable primaryKeyObj) throws PortalException {
-        return assignmentPersistence.create(((Long) primaryKeyObj).longValue());
-    }
+		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
+			"assignmentId");
 
-    /**
-     * @throws PortalException
-     */
-    @Override
-    public PersistedModel deletePersistedModel(PersistedModel persistedModel) throws PortalException {
-        return assignmentLocalService.deleteAssignment((Assignment) persistedModel);
-    }
+		return indexableActionableDynamicQuery;
+	}
 
-    public BasePersistence<Assignment> getBasePersistence() {
-        return assignmentPersistence;
-    }
+	protected void initActionableDynamicQuery(
+		ActionableDynamicQuery actionableDynamicQuery) {
 
-    /**
-     * @throws PortalException
-     */
-    @Override
-    public PersistedModel getPersistedModel(Serializable primaryKeyObj) throws PortalException {
-        return assignmentPersistence.findByPrimaryKey(primaryKeyObj);
-    }
+		actionableDynamicQuery.setBaseLocalService(assignmentLocalService);
+		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(Assignment.class);
 
-    /**
-     * Returns all the assignments matching the UUID and company.
-     *
-     * @param uuid      the UUID of the assignments
-     * @param companyId the primary key of the company
-     * @return the matching assignments, or an empty list if no matches were found
-     */
-    @Override
-    public List<Assignment> getAssignmentsByUuidAndCompanyId(String uuid, long companyId) {
-        return assignmentPersistence.findByUuid_C(uuid, companyId);
-    }
+		actionableDynamicQuery.setPrimaryKeyPropertyName("assignmentId");
+	}
 
-    /**
-     * Returns a range of assignments matching the UUID and company.
-     *
-     * @param uuid              the UUID of the assignments
-     * @param companyId         the primary key of the company
-     * @param start             the lower bound of the range of assignments
-     * @param end               the upper bound of the range of assignments (not inclusive)
-     * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-     * @return the range of matching assignments, or an empty list if no matches were found
-     */
-    @Override
-    public List<Assignment> getAssignmentsByUuidAndCompanyId(
-            String uuid, long companyId, int start, int end, OrderByComparator<Assignment> orderByComparator) {
-        return assignmentPersistence.findByUuid_C(uuid, companyId, start, end, orderByComparator);
-    }
+	@Override
+	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
+		final PortletDataContext portletDataContext) {
 
-    /**
-     * Returns the assignment matching the UUID and group.
-     *
-     * @param uuid    the assignment's UUID
-     * @param groupId the primary key of the group
-     * @return the matching assignment
-     * @throws PortalException if a matching assignment could not be found
-     */
-    @Override
-    public Assignment getAssignmentByUuidAndGroupId(String uuid, long groupId) throws PortalException {
-        return assignmentPersistence.findByUUID_G(uuid, groupId);
-    }
+		final ExportActionableDynamicQuery exportActionableDynamicQuery =
+			new ExportActionableDynamicQuery() {
 
-    /**
-     * Returns a range of all the assignments.
-     *
-     * <p>
-     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>com.liferay.training.gradebook.model.impl.AssignmentModelImpl</code>.
-     * </p>
-     *
-     * @param start the lower bound of the range of assignments
-     * @param end   the upper bound of the range of assignments (not inclusive)
-     * @return the range of assignments
-     */
-    @Override
-    public List<Assignment> getAssignments(int start, int end) {
-        return assignmentPersistence.findAll(start, end);
-    }
+				@Override
+				public long performCount() throws PortalException {
+					ManifestSummary manifestSummary =
+						portletDataContext.getManifestSummary();
 
-    /**
-     * Returns the number of assignments.
-     *
-     * @return the number of assignments
-     */
-    @Override
-    public int getAssignmentsCount() {
-        return assignmentPersistence.countAll();
-    }
+					StagedModelType stagedModelType = getStagedModelType();
 
-    /**
-     * Updates the assignment in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
-     *
-     * <p>
-     * <strong>Important:</strong> Inspect AssignmentLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
-     * </p>
-     *
-     * @param assignment the assignment
-     * @return the assignment that was updated
-     */
-    @Indexable(type = IndexableType.REINDEX)
-    @Override
-    public Assignment updateAssignment(Assignment assignment) {
-        return assignmentPersistence.update(assignment);
-    }
+					long modelAdditionCount = super.performCount();
 
-    @Deactivate
-    protected void deactivate() {
-        _setLocalServiceUtilService(null);
-    }
+					manifestSummary.addModelAdditionCount(
+						stagedModelType, modelAdditionCount);
 
-    @Override
-    public Class<?>[] getAopInterfaces() {
-        return new Class<?>[]{
-                AssignmentLocalService.class, IdentifiableOSGiService.class,
-                PersistedModelLocalService.class
-        };
-    }
+					long modelDeletionCount =
+						ExportImportHelperUtil.getModelDeletionCount(
+							portletDataContext, stagedModelType);
 
-    @Override
-    public void setAopProxy(Object aopProxy) {
-        assignmentLocalService = (AssignmentLocalService) aopProxy;
-        _setLocalServiceUtilService(assignmentLocalService);
-    }
+					manifestSummary.addModelDeletionCount(
+						stagedModelType, modelDeletionCount);
 
-    /**
-     * Returns the OSGi service identifier.
-     *
-     * @return the OSGi service identifier
-     */
-    @Override
-    public String getOSGiServiceIdentifier() {
-        return AssignmentLocalService.class.getName();
-    }
+					return modelAdditionCount;
+				}
 
-    protected Class<?> getModelClass() {
-        return Assignment.class;
-    }
+			};
 
-    protected String getModelClassName() {
-        return Assignment.class.getName();
-    }
+		initActionableDynamicQuery(exportActionableDynamicQuery);
 
-    /**
-     * Performs a SQL query.
-     *
-     * @param sql the sql query
-     */
-    protected void runSQL(String sql) {
-        try {
-            DataSource dataSource = assignmentPersistence.getDataSource();
-            DB db = DBManagerUtil.getDB();
-            sql = db.buildSQL(sql);
-            sql = PortalUtil.transformSQL(sql);
+		exportActionableDynamicQuery.setAddCriteriaMethod(
+			new ActionableDynamicQuery.AddCriteriaMethod() {
 
-            SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource, sql);
-            sqlUpdate.update();
-        } catch (Exception exception) {
-            throw new SystemException(exception);
-        }
-    }
+				@Override
+				public void addCriteria(DynamicQuery dynamicQuery) {
+					portletDataContext.addDateRangeCriteria(
+						dynamicQuery, "modifiedDate");
+				}
 
-    private void _setLocalServiceUtilService(
-            AssignmentLocalService assignmentLocalService) {
+			});
 
-        try {
-            Field field = AssignmentLocalServiceUtil.class.getDeclaredField("_service");
+		exportActionableDynamicQuery.setCompanyId(
+			portletDataContext.getCompanyId());
 
-            field.setAccessible(true);
-            field.set(null, assignmentLocalService);
-        } catch (ReflectiveOperationException reflectiveOperationException) {
-            throw new RuntimeException(reflectiveOperationException);
-        }
-    }
+		exportActionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod<Assignment>() {
 
-    protected AssignmentLocalService assignmentLocalService;
+				@Override
+				public void performAction(Assignment assignment)
+					throws PortalException {
 
-    @Reference
-    protected AssignmentPersistence assignmentPersistence;
+					StagedModelDataHandlerUtil.exportStagedModel(
+						portletDataContext, assignment);
+				}
 
-    @Reference
-    protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
+			});
+		exportActionableDynamicQuery.setStagedModelType(
+			new StagedModelType(
+				PortalUtil.getClassNameId(Assignment.class.getName())));
 
-    @Reference
-    protected com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService;
+		return exportActionableDynamicQuery;
+	}
 
-    @Reference
-    protected com.liferay.portal.kernel.service.GroupLocalService groupLocalService;
+	/**
+	 * @throws PortalException
+	 */
+	public PersistedModel createPersistedModel(Serializable primaryKeyObj)
+		throws PortalException {
 
-    @Reference
-    protected com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService;
+		return assignmentPersistence.create(((Long)primaryKeyObj).longValue());
+	}
 
-    @Reference
-    protected com.liferay.portal.kernel.service.UserLocalService userLocalService;
+	/**
+	 * @throws PortalException
+	 */
+	@Override
+	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
+		throws PortalException {
 
-    @Reference
-    protected com.liferay.asset.kernel.service.AssetEntryLocalService assetEntryLocalService;
+		return assignmentLocalService.deleteAssignment(
+			(Assignment)persistedModel);
+	}
 
-    @Reference
-    protected com.liferay.asset.kernel.service.AssetLinkLocalService assetLinkLocalService;
+	public BasePersistence<Assignment> getBasePersistence() {
+		return assignmentPersistence;
+	}
 
-    @Reference
-    protected com.liferay.asset.kernel.service.AssetTagLocalService assetTagLocalService;
+	/**
+	 * @throws PortalException
+	 */
+	@Override
+	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
+		throws PortalException {
+
+		return assignmentPersistence.findByPrimaryKey(primaryKeyObj);
+	}
+
+	/**
+	 * Returns all the assignments matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the assignments
+	 * @param companyId the primary key of the company
+	 * @return the matching assignments, or an empty list if no matches were found
+	 */
+	@Override
+	public List<Assignment> getAssignmentsByUuidAndCompanyId(
+		String uuid, long companyId) {
+
+		return assignmentPersistence.findByUuid_C(uuid, companyId);
+	}
+
+	/**
+	 * Returns a range of assignments matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the assignments
+	 * @param companyId the primary key of the company
+	 * @param start the lower bound of the range of assignments
+	 * @param end the upper bound of the range of assignments (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the range of matching assignments, or an empty list if no matches were found
+	 */
+	@Override
+	public List<Assignment> getAssignmentsByUuidAndCompanyId(
+		String uuid, long companyId, int start, int end,
+		OrderByComparator<Assignment> orderByComparator) {
+
+		return assignmentPersistence.findByUuid_C(
+			uuid, companyId, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns the assignment matching the UUID and group.
+	 *
+	 * @param uuid the assignment's UUID
+	 * @param groupId the primary key of the group
+	 * @return the matching assignment
+	 * @throws PortalException if a matching assignment could not be found
+	 */
+	@Override
+	public Assignment getAssignmentByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException {
+
+		return assignmentPersistence.findByUUID_G(uuid, groupId);
+	}
+
+	/**
+	 * Returns a range of all the assignments.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>com.liferay.training.gradebook.model.impl.AssignmentModelImpl</code>.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of assignments
+	 * @param end the upper bound of the range of assignments (not inclusive)
+	 * @return the range of assignments
+	 */
+	@Override
+	public List<Assignment> getAssignments(int start, int end) {
+		return assignmentPersistence.findAll(start, end);
+	}
+
+	/**
+	 * Returns the number of assignments.
+	 *
+	 * @return the number of assignments
+	 */
+	@Override
+	public int getAssignmentsCount() {
+		return assignmentPersistence.countAll();
+	}
+
+	/**
+	 * Updates the assignment in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	 *
+	 * <p>
+	 * <strong>Important:</strong> Inspect AssignmentLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
+	 * </p>
+	 *
+	 * @param assignment the assignment
+	 * @return the assignment that was updated
+	 */
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public Assignment updateAssignment(Assignment assignment) {
+		return assignmentPersistence.update(assignment);
+	}
+
+	@Deactivate
+	protected void deactivate() {
+		_setLocalServiceUtilService(null);
+	}
+
+	@Override
+	public Class<?>[] getAopInterfaces() {
+		return new Class<?>[] {
+			AssignmentLocalService.class, IdentifiableOSGiService.class,
+			PersistedModelLocalService.class
+		};
+	}
+
+	@Override
+	public void setAopProxy(Object aopProxy) {
+		assignmentLocalService = (AssignmentLocalService)aopProxy;
+
+		_setLocalServiceUtilService(assignmentLocalService);
+	}
+
+	/**
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
+	@Override
+	public String getOSGiServiceIdentifier() {
+		return AssignmentLocalService.class.getName();
+	}
+
+	protected Class<?> getModelClass() {
+		return Assignment.class;
+	}
+
+	protected String getModelClassName() {
+		return Assignment.class.getName();
+	}
+
+	/**
+	 * Performs a SQL query.
+	 *
+	 * @param sql the sql query
+	 */
+	protected void runSQL(String sql) {
+		try {
+			DataSource dataSource = assignmentPersistence.getDataSource();
+
+			DB db = DBManagerUtil.getDB();
+
+			sql = db.buildSQL(sql);
+			sql = PortalUtil.transformSQL(sql);
+
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
+				dataSource, sql);
+
+			sqlUpdate.update();
+		}
+		catch (Exception exception) {
+			throw new SystemException(exception);
+		}
+	}
+
+	private void _setLocalServiceUtilService(
+		AssignmentLocalService assignmentLocalService) {
+
+		try {
+			Field field = AssignmentLocalServiceUtil.class.getDeclaredField(
+				"_service");
+
+			field.setAccessible(true);
+
+			field.set(null, assignmentLocalService);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
+		}
+	}
+
+	protected AssignmentLocalService assignmentLocalService;
+
+	@Reference
+	protected AssignmentPersistence assignmentPersistence;
+
+	@Reference
+	protected com.liferay.counter.kernel.service.CounterLocalService
+		counterLocalService;
+
+	@Reference
+	protected com.liferay.portal.kernel.service.ClassNameLocalService
+		classNameLocalService;
+
+	@Reference
+	protected com.liferay.portal.kernel.service.GroupLocalService
+		groupLocalService;
+
+	@Reference
+	protected com.liferay.portal.kernel.service.ResourceLocalService
+		resourceLocalService;
+
+	@Reference
+	protected com.liferay.portal.kernel.service.UserLocalService
+		userLocalService;
+
+	@Reference
+	protected com.liferay.asset.kernel.service.AssetEntryLocalService
+		assetEntryLocalService;
+
+	@Reference
+	protected com.liferay.asset.kernel.service.AssetLinkLocalService
+		assetLinkLocalService;
+
+	@Reference
+	protected com.liferay.asset.kernel.service.AssetTagLocalService
+		assetTagLocalService;
+
 }
