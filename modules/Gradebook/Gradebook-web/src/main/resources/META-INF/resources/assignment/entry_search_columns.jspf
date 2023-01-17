@@ -1,9 +1,9 @@
 <%-- Generate assignment view  URL. --%>
 
 <portlet:renderURL var="viewAssignmentURL">
-    <portlet:param name="mvcRenderCommandName" value="<%=MVCCommandNames.VIEW_ASSIGNMENT %>" />
-    <portlet:param name="redirect" value="${currentURL}" />
-    <portlet:param name="assignmentId" value="${entry.assignmentId}" />
+    <portlet:param name="mvcRenderCommandName" value="<%=MVCCommandNames.VIEW_ASSIGNMENT %>"/>
+    <portlet:param name="redirect" value="${currentURL}"/>
+    <portlet:param name="assignmentId" value="${entry.assignmentId}"/>
 </portlet:renderURL>
 
 <c:choose>
@@ -16,16 +16,14 @@
 
         <liferay-ui:search-container-column-text colspan="<%=2%>">
 
-            <%
-                String modifiedDateDescription = LanguageUtil.getTimeDescription(
-                                request, System.currentTimeMillis() - entry.getModifiedDate().getTime(), true
-                        );
-            %>
+            <%String modifiedDateDescription = LanguageUtil.getTimeDescription(
+                        request, System.currentTimeMillis() - entry.getModifiedDate().getTime(), true
+                );%>
 
             <h5 class="text-default">
                 <liferay-ui:message
                         arguments="<%=new String[] {entry.getUserName(), modifiedDateDescription}%>"
-                        key="x-modified-x-ago" />
+                        key="x-modified-x-ago"/>
             </h5>
 
             <h4>
@@ -36,7 +34,7 @@
 
         </liferay-ui:search-container-column-text>
 
-        <liferay-ui:search-container-column-jsp path="/assignment/entry_actions.jsp" />
+        <liferay-ui:search-container-column-jsp path="/assignment/entry_actions.jsp"/>
     </c:when>
 
     <%-- Card view  --%>
@@ -95,36 +93,36 @@
 </c:choose>
 entry_actions.jsp
 
-<%@ include file="/init.jsp"%>
+<%@ include file="/init.jsp" %>
 
-<c:set var="assignment" value="${SEARCH_CONTAINER_RESULT_ROW.object}" />
+<c:set var="assignment" value="${SEARCH_CONTAINER_RESULT_ROW.object}"/>
 
 <liferay-ui:icon-menu markupView="lexicon">
 
     <%-- View action. --%>
     <portlet:renderURL var="viewAssignmentURL">
-        <portlet:param name="mvcRenderCommandName" value="<%=MVCCommandNames.VIEW_ASSIGNMENT %>" />
-        <portlet:param name="redirect" value="${currentURL}" />
-        <portlet:param name="assignmentId" value="${assignment.assignmentId}" />
+        <portlet:param name="mvcRenderCommandName" value="<%=MVCCommandNames.VIEW_ASSIGNMENT %>"/>
+        <portlet:param name="redirect" value="${currentURL}"/>
+        <portlet:param name="assignmentId" value="${assignment.assignmentId}"/>
     </portlet:renderURL>
 
-    <liferay-ui:icon message="view" url="${viewAssignmentURL}" />
+    <liferay-ui:icon message="view" url="${viewAssignmentURL}"/>
 
     <%-- Edit action. --%>
     <portlet:renderURL var="editAssignmentURL">
-        <portlet:param name="mvcRenderCommandName" value="<%=MVCCommandNames.EDIT_ASSIGNMENT %>" />
-        <portlet:param name="redirect" value="${currentURL}" />
-        <portlet:param name="assignmentId" value="${assignment.assignmentId}" />
+        <portlet:param name="mvcRenderCommandName" value="<%=MVCCommandNames.EDIT_ASSIGNMENT %>"/>
+        <portlet:param name="redirect" value="${currentURL}"/>
+        <portlet:param name="assignmentId" value="${assignment.assignmentId}"/>
     </portlet:renderURL>
 
-    <liferay-ui:icon message="edit" url="${editAssignmentURL}" />
+    <liferay-ui:icon message="edit" url="${editAssignmentURL}"/>
 
     <%-- Delete action. --%>
     <portlet:actionURL name="<%=MVCCommandNames.DELETE_ASSIGNMENT %>" var="deleteAssignmentURL">
-        <portlet:param name="redirect" value="${currentURL}" />
-        <portlet:param name="assignmentId" value="${assignment.assignmentId}" />
+        <portlet:param name="redirect" value="${currentURL}"/>
+        <portlet:param name="assignmentId" value="${assignment.assignmentId}"/>
     </portlet:actionURL>
 
-    <liferay-ui:icon-delete url="${deleteAssignmentURL}" />
+    <liferay-ui:icon-delete url="${deleteAssignmentURL}"/>
 
 </liferay-ui:icon-menu>
