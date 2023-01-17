@@ -30,6 +30,5 @@
 	<liferay-ui:search-iterator
 			displayStyle="${assignmentsManagementToolbarDisplayContext.getDisplayStyle()}"
 			markupView="lexicon"/>
-
 </liferay-ui:search-container>
 </div>

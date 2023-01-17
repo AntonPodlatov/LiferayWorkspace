@@ -65,7 +65,6 @@ public class AssignmentsManagementToolbarDisplayContext extends BaseManagementTo
      * Returns the assignment list display style.
      * <p>
      * Current selection is stored in portal preferences.
-     *
      * @return current display style
      */
     public String getDisplayStyle() {
@@ -83,7 +82,6 @@ public class AssignmentsManagementToolbarDisplayContext extends BaseManagementTo
 
     /**
      * Returns the sort order column.
-     *
      * @return sort column
      */
     public String getOrderByCol() {
@@ -92,7 +90,6 @@ public class AssignmentsManagementToolbarDisplayContext extends BaseManagementTo
 
     /**
      * Returns the sort type (ascending / descending).
-     *
      * @return sort type
      */
     public String getOrderByType() {
@@ -101,7 +98,6 @@ public class AssignmentsManagementToolbarDisplayContext extends BaseManagementTo
 
     /**
      * Returns the action URL for the search.
-     *
      * @return search action URL
      */
     @Override
@@ -155,21 +151,19 @@ public class AssignmentsManagementToolbarDisplayContext extends BaseManagementTo
      */
     @Override
     protected List<DropdownItem> getOrderByDropdownItems() {
-        return new DropdownItemList() {
-            {
-                add(dropdownItem -> {
-                    dropdownItem.setActive("title".equals(getOrderByCol()));
-                    dropdownItem.setHref(_getCurrentSortingURL(), "orderByCol", "title");
-                    dropdownItem.setLabel(LanguageUtil.get(request, "title"));
-                });
+        return new DropdownItemList() {{
+            add(dropdownItem -> {
+                dropdownItem.setActive("title".equals(getOrderByCol()));
+                dropdownItem.setHref(_getCurrentSortingURL(), "orderByCol", "title");
+                dropdownItem.setLabel(LanguageUtil.get(request, "title"));
+            });
 
-                add(dropdownItem -> {
-                    dropdownItem.setActive("createDate".equals(getOrderByCol()));
-                    dropdownItem.setHref(_getCurrentSortingURL(), "orderByCol", "createDate");
-                    dropdownItem.setLabel(LanguageUtil.get(request, "create-date"));
-                });
-            }
-        };
+            add(dropdownItem -> {
+                dropdownItem.setActive("createDate".equals(getOrderByCol()));
+                dropdownItem.setHref(_getCurrentSortingURL(), "orderByCol", "createDate");
+                dropdownItem.setLabel(LanguageUtil.get(request, "create-date"));
+            });
+        }};
     }
 
     /**
