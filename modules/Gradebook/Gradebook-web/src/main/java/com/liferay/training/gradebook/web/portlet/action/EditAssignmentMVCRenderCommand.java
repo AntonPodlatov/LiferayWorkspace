@@ -36,8 +36,8 @@ public class EditAssignmentMVCRenderCommand implements MVCRenderCommand {
             try {
                 // Call the service to get the assignment for editing.
                 assignment = _assignmentService.getAssignment(assignmentId);
-            } catch (PortalException nsae) {
-                nsae.printStackTrace();
+            } catch (PortalException e) {
+                e.printStackTrace();
             }
         }
 
