@@ -1,3 +1,4 @@
+<%@ include file="/init.jsp"%>
 <div class="container-fluid-1280">
 
 <h1><liferay-ui:message key="assignments" /></h1>
@@ -8,8 +9,7 @@
 		displayContext="${assignmentsManagementToolbarDisplayContext}"
 		itemsTotal="${assignmentCount}"
 		searchContainerId="assignmentEntries"
-		selectable="false"
-/>
+		selectable="false"/>
 
 <%-- Search container. --%>
 <liferay-ui:search-container
@@ -29,7 +29,7 @@
 	<%-- Iterator / Paging --%>
 	<liferay-ui:search-iterator
 			displayStyle="${assignmentsManagementToolbarDisplayContext.getDisplayStyle()}"
-			markupView="lexicon"
-	/>
+			markupView="lexicon"/>
+
 </liferay-ui:search-container>
 </div>

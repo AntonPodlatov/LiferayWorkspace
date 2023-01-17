@@ -9,24 +9,17 @@
 <c:choose>
 
     <%-- Descriptive (list) view --%>
-
-    <c:when
-            test='${assignmentsManagementToolbarDisplayContext.getDisplayStyle().equals("descriptive")}'>
+    <c:when test='${assignmentsManagementToolbarDisplayContext.getDisplayStyle().equals("descriptive")}'>
 
         <%-- User --%>
-
-        <liferay-ui:search-container-column-user
-                showDetails="<%=false%>"
-                userId="<%=entry.getUserId()%>"
-        />
+        <liferay-ui:search-container-column-user showDetails="<%=false%>" userId="<%=entry.getUserId()%>"/>
 
         <liferay-ui:search-container-column-text colspan="<%=2%>">
 
             <%
-                String modifiedDateDescription =
-                        LanguageUtil.getTimeDescription(
-                                request, System.currentTimeMillis()
-                                        - entry.getModifiedDate().getTime(), true);
+                String modifiedDateDescription = LanguageUtil.getTimeDescription(
+                                request, System.currentTimeMillis() - entry.getModifiedDate().getTime(), true
+                        );
             %>
 
             <h5 class="text-default">
@@ -43,14 +36,11 @@
 
         </liferay-ui:search-container-column-text>
 
-        <liferay-ui:search-container-column-jsp
-                path="/assignment/entry_actions.jsp" />
+        <liferay-ui:search-container-column-jsp path="/assignment/entry_actions.jsp" />
     </c:when>
 
     <%-- Card view  --%>
-
-    <c:when
-            test='${assignmentsManagementToolbarDisplayContext.getDisplayStyle().equals("icon")}'>
+    <c:when test='${assignmentsManagementToolbarDisplayContext.getDisplayStyle().equals("icon")}'>
 
         <%
             row.setCssClass("lfr-asset-item");
@@ -59,7 +49,6 @@
         <liferay-ui:search-container-column-text>
 
             <%-- Vertical card. --%>
-
             <liferay-frontend:icon-vertical-card
                     actionJsp="/assignment/entry_actions.jsp"
                     actionJspServletContext="<%= application %>"
@@ -69,10 +58,7 @@
 
                 <liferay-frontend:vertical-card-sticker-bottom>
 
-                    <liferay-ui:user-portrait
-                            cssClass="sticker sticker-bottom"
-                            userId="${entry.userId}"
-                    />
+                    <liferay-ui:user-portrait cssClass="sticker sticker-bottom" userId="${entry.userId}"/>
                 </liferay-frontend:vertical-card-sticker-bottom>
 
                 <liferay-frontend:vertical-card-footer>
@@ -80,7 +66,6 @@
                     <div class="truncate-text">
 
                             <%-- Strip HTML --%>
-
                         <%=HtmlUtil.stripHtml(entry.getDescription(locale)) %>
                     </div>
                 </liferay-frontend:vertical-card-footer>
@@ -89,29 +74,23 @@
     </c:when>
 
     <%-- Table view --%>
-
     <c:otherwise>
-
         <liferay-ui:search-container-column-text
                 href="${viewAssignmentURL}"
                 name="title"
-                value="<%= entry.getTitle(locale) %>"
-        />
+                value="<%= entry.getTitle(locale) %>"/>
 
         <liferay-ui:search-container-column-user
                 name="author"
-                userId="${entry.userId}"
-        />
+                userId="${entry.userId}"/>
 
         <liferay-ui:search-container-column-date
                 name="create-date"
-                property="createDate"
-        />
+                property="createDate"/>
 
         <liferay-ui:search-container-column-jsp
                 name="actions"
-                path="/assignment/entry_actions.jsp"
-        />
+                path="/assignment/entry_actions.jsp"/>
     </c:otherwise>
 </c:choose>
 entry_actions.jsp
@@ -123,10 +102,8 @@ entry_actions.jsp
 <liferay-ui:icon-menu markupView="lexicon">
 
     <%-- View action. --%>
-
     <portlet:renderURL var="viewAssignmentURL">
-        <portlet:param name="mvcRenderCommandName"
-                       value="<%=MVCCommandNames.VIEW_ASSIGNMENT %>" />
+        <portlet:param name="mvcRenderCommandName" value="<%=MVCCommandNames.VIEW_ASSIGNMENT %>" />
         <portlet:param name="redirect" value="${currentURL}" />
         <portlet:param name="assignmentId" value="${assignment.assignmentId}" />
     </portlet:renderURL>
@@ -134,10 +111,8 @@ entry_actions.jsp
     <liferay-ui:icon message="view" url="${viewAssignmentURL}" />
 
     <%-- Edit action. --%>
-
     <portlet:renderURL var="editAssignmentURL">
-        <portlet:param name="mvcRenderCommandName"
-                       value="<%=MVCCommandNames.EDIT_ASSIGNMENT %>" />
+        <portlet:param name="mvcRenderCommandName" value="<%=MVCCommandNames.EDIT_ASSIGNMENT %>" />
         <portlet:param name="redirect" value="${currentURL}" />
         <portlet:param name="assignmentId" value="${assignment.assignmentId}" />
     </portlet:renderURL>
@@ -145,7 +120,6 @@ entry_actions.jsp
     <liferay-ui:icon message="edit" url="${editAssignmentURL}" />
 
     <%-- Delete action. --%>
-
     <portlet:actionURL name="<%=MVCCommandNames.DELETE_ASSIGNMENT %>" var="deleteAssignmentURL">
         <portlet:param name="redirect" value="${currentURL}" />
         <portlet:param name="assignmentId" value="${assignment.assignmentId}" />
