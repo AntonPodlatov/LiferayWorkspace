@@ -1,4 +1,6 @@
 dependencies {
 	compileOnly group: "com.liferay.portal", name: "release.portal.api"
     compileOnly 'org.osgi:org.osgi.annotation.versioning'
+    compileOnly 'org.osgi:org.osgi.core'
+    compileOnly group: "com.liferay", name: "com.liferay.petra.sql.dsl.api"
 }
