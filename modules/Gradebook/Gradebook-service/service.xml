@@ -5,21 +5,23 @@
 <service-builder dependency-injector="ds" package-path="com.liferay.training.gradebook">
     <namespace>Gradebook</namespace>
     <!--<entity data-source="sampleDataSource" local-service="true" name="Foo" remote-service="false" session-factory="sampleSessionFactory" table="foo" tx-manager="sampleTransactionManager uuid="true"">-->
-    <entity name="Assignment" remote-service="true" local-service="true" uuid="true">
+    <entity local-service="true" name="Assignment" remote-service="true" uuid="true">
         <!-- PK fields -->
         <column name="assignmentId" primary="true" type="long"/>
+
         <!-- Group instance -->
         <column name="groupId" type="long"/>
 
         <!-- Audit fields -->
+        <column name="companyId" type="long"/>
         <column name="userId" type="long"/>
         <column name="userName" type="String"/>
-        <column name="companyId" type="long"/>
         <column name="createDate" type="Date"/>
         <column name="modifiedDate" type="Date"/>
+
         <column name="title" type="String" localized="true"/>
-        <column name="description" type="String" localized="true"/>
-        <column name="dueDate" type="Date"/>
+        <column name="description" type="String" localized="true" />
+        <column name="dueDate" type="Date" />
 
         <!-- Order -->
         <order by="asc">
@@ -27,7 +29,7 @@
         </order>
 
         <!-- Finder methods -->
-        <finder name="=GroupId" return-type="Collection">
+        <finder name="GroupId" return-type="Collection">
             <finder-column name="groupId"/>
         </finder>
 
@@ -35,6 +37,7 @@
         <reference entity="Group" package-path="com.liferay.portal"/>
 
         <!-- References -->
+        <!-- Entity services needed for the integration to Asset framework -->
         <reference entity="AssetEntry" package-path="com.liferay.portlet.asset"/>
         <reference entity="AssetLink" package-path="com.liferay.portlet.asset"/>
         <reference entity="AssetTag" package-path="com.liferay.portlet.asset"/>
