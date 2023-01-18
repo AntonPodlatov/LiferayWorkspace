@@ -4,28 +4,31 @@
 
 <liferay-ui:icon-menu markupView="lexicon">
     <%-- View action. --%>
-    <portlet:renderURL var="viewAssignmentURL">
-        <portlet:param name="mvcRenderCommandName" value="<%=MVCCommandNames.VIEW_ASSIGNMENT %>"/>
-        <portlet:param name="redirect" value="${currentURL}"/>
-        <portlet:param name="assignmentId" value="${assignment.assignmentId}"/>
-    </portlet:renderURL>
+    <c:if test="${assignmentPermission.contains(permissionChecker, assignment.assignmentId, 'VIEW' )}">
 
-    <liferay-ui:icon message="view" url="${viewAssignmentURL}"/>
+        <portlet:renderURL var="viewAssignmentURL">
+            <portlet:param name="mvcRenderCommandName" value="<%=MVCCommandNames.VIEW_ASSIGNMENT %>"/>
+            <portlet:param name="redirect" value="${currentURL}"/>
+            <portlet:param name="assignmentId" value="${assignment.assignmentId}"/>
+        </portlet:renderURL>
 
-    <%-- Edit action. --%>
-    <portlet:renderURL var="editAssignmentURL">
-        <portlet:param name="mvcRenderCommandName" value="<%=MVCCommandNames.EDIT_ASSIGNMENT %>"/>
-        <portlet:param name="redirect" value="${currentURL}"/>
-        <portlet:param name="assignmentId" value="${assignment.assignmentId}"/>
-    </portlet:renderURL>
+        <liferay-ui:icon message="view" url="${viewAssignmentURL}"/>
 
-    <liferay-ui:icon message="edit" url="${editAssignmentURL}"/>
+        <%-- Edit action. --%>
+        <portlet:renderURL var="editAssignmentURL">
+            <portlet:param name="mvcRenderCommandName" value="<%=MVCCommandNames.EDIT_ASSIGNMENT %>"/>
+            <portlet:param name="redirect" value="${currentURL}"/>
+            <portlet:param name="assignmentId" value="${assignment.assignmentId}"/>
+        </portlet:renderURL>
 
-    <%-- Delete action. --%>
-    <portlet:actionURL name="<%=MVCCommandNames.DELETE_ASSIGNMENT %>" var="deleteAssignmentURL">
-        <portlet:param name="redirect" value="${currentURL}"/>
-        <portlet:param name="assignmentId" value="${assignment.assignmentId}"/>
-    </portlet:actionURL>
+        <liferay-ui:icon message="edit" url="${editAssignmentURL}"/>
 
-    <liferay-ui:icon-delete url="${deleteAssignmentURL}"/>
+        <%-- Delete action. --%>
+        <portlet:actionURL name="<%=MVCCommandNames.DELETE_ASSIGNMENT %>" var="deleteAssignmentURL">
+            <portlet:param name="redirect" value="${currentURL}"/>
+            <portlet:param name="assignmentId" value="${assignment.assignmentId}"/>
+        </portlet:actionURL>
+
+        <liferay-ui:icon-delete url="${deleteAssignmentURL}"/>
+    </c:if>
 </liferay-ui:icon-menu>

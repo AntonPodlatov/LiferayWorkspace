@@ -62,20 +62,11 @@ public class ViewAssignmentsMVCRenderCommand implements MVCRenderCommand {
      * @param renderRequest
      */
     private void addAssignmentListAttributes(RenderRequest renderRequest) {
-
-        ThemeDisplay themeDisplay =
-                (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+        ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
         // Resolve start and end for the search.
-
-        int currentPage = ParamUtil.getInteger(
-                renderRequest, SearchContainer.DEFAULT_CUR_PARAM,
-                SearchContainer.DEFAULT_CUR);
-
-        int delta = ParamUtil.getInteger(
-                renderRequest, SearchContainer.DEFAULT_DELTA_PARAM,
-                SearchContainer.DEFAULT_DELTA);
-
+        int currentPage = ParamUtil.getInteger(renderRequest, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_CUR);
+        int delta = ParamUtil.getInteger(renderRequest, SearchContainer.DEFAULT_DELTA_PARAM, SearchContainer.DEFAULT_DELTA);
         int start = ((currentPage > 0) ? (currentPage - 1) : 0) * delta;
         int end = start + delta;
 
@@ -83,37 +74,29 @@ public class ViewAssignmentsMVCRenderCommand implements MVCRenderCommand {
         // Notice that this doesn't really sort on title because the field is
         // stored in XML. In real world this search would be integrated to the
         // search engine  to get localized sort options.
-
-        String orderByCol =
-                ParamUtil.getString(renderRequest, "orderByCol", "title");
-        String orderByType =
-                ParamUtil.getString(renderRequest, "orderByType", "asc");
+        String orderByCol = ParamUtil.getString(renderRequest, "orderByCol", "title");
+        String orderByType = ParamUtil.getString(renderRequest, "orderByType", "asc");
 
         // Create comparator
-
         OrderByComparator<Assignment> comparator =
                 OrderByComparatorFactoryUtil.create(
                         "Assignment", orderByCol, !("asc").equals(orderByType));
 
         // Get keywords.
         // Notice that cleaning keywords is not implemented.
-
         String keywords = ParamUtil.getString(renderRequest, "keywords");
 
         // Call the service to get the list of assignments.
-
         List<Assignment> assignments =
-                _assignmentService.getAssignmentsByKeywords(
-                        themeDisplay.getScopeGroupId(), keywords, start, end,
-                        comparator);
+                _assignmentService
+                        .getAssignmentsByKeywords
+                                (themeDisplay.getScopeGroupId(), keywords, start, end, comparator);
 
         // Set request attributes.
-
         renderRequest.setAttribute("assignments", assignments);
-        renderRequest.setAttribute(
-                "assignmentCount", _assignmentService.getAssignmentsCountByKeywords(
-                        themeDisplay.getScopeGroupId(), keywords));
-
+        renderRequest
+                .setAttribute
+                        ("assignmentCount", _assignmentService.getAssignmentsCountByKeywords(themeDisplay.getScopeGroupId(), keywords));
     }
 
     /**
@@ -123,23 +106,23 @@ public class ViewAssignmentsMVCRenderCommand implements MVCRenderCommand {
      * @param renderResponse
      */
     private void addManagementToolbarAttributes(
-            RenderRequest renderRequest, RenderResponse renderResponse) {
-
+            RenderRequest renderRequest,
+            RenderResponse renderResponse
+    ) {
         LiferayPortletRequest liferayPortletRequest =
                 _portal.getLiferayPortletRequest(renderRequest);
-
         LiferayPortletResponse liferayPortletResponse =
                 _portal.getLiferayPortletResponse(renderResponse);
 
-        AssignmentsManagementToolbarDisplayContext assignmentsManagementToolbarDisplayContext =
-                new AssignmentsManagementToolbarDisplayContext(
-                        liferayPortletRequest, liferayPortletResponse,
-                        _portal.getHttpServletRequest(renderRequest));
+        AssignmentsManagementToolbarDisplayContext
+                assignmentsManagementToolbarDisplayContext =
+                new AssignmentsManagementToolbarDisplayContext
+                        (liferayPortletRequest, liferayPortletResponse,
+                                _portal.getHttpServletRequest(renderRequest));
 
-        renderRequest.setAttribute(
-                "assignmentsManagementToolbarDisplayContext",
-                assignmentsManagementToolbarDisplayContext);
-
+        renderRequest
+                .setAttribute("assignmentsManagementToolbarDisplayContext",
+                        assignmentsManagementToolbarDisplayContext);
     }
 
     @Reference

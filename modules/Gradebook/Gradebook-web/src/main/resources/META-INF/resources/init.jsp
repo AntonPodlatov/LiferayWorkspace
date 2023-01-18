@@ -7,6 +7,7 @@
 <%@ taglib prefix="clay" uri="http://liferay.com/tld/clay" %>
 
 <%@ taglib prefix="liferay-item-selector" uri="http://liferay.com/tld/item-selector" %>
+<%@ taglib prefix="liferay-security" uri="http://liferay.com/tld/security" %>
 <%@ taglib prefix="liferay-frontend" uri="http://liferay.com/tld/frontend" %>
 <%@ taglib prefix="liferay-portlet" uri="http://liferay.com/tld/portlet" %>
 <%@ taglib prefix="liferay-theme" uri="http://liferay.com/tld/theme" %>
