@@ -27,7 +27,9 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.training.gradebook.model.Assignment;
 import com.liferay.training.gradebook.service.base.AssignmentLocalServiceBaseImpl;
 
+import com.liferay.training.gradebook.validator.AssignmentValidator;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import java.util.Date;
 import java.util.List;
@@ -56,6 +58,9 @@ public class AssignmentLocalServiceImpl extends AssignmentLocalServiceBaseImpl {
             Date dueDate,
             ServiceContext serviceContext
     ) throws PortalException {
+        // Validate assignment parameters.
+        _assignmentValidator.validate(titleMap, descriptionMap, dueDate);
+
         Group group = groupLocalService.getGroup(groupId);
         long userId = serviceContext.getUserId();
         User user = userLocalService.getUser(userId);
@@ -83,56 +88,89 @@ public class AssignmentLocalServiceImpl extends AssignmentLocalServiceBaseImpl {
             Date dueDate,
             ServiceContext serviceContext
     ) throws PortalException {
+        // Validate assignment parameters.
+        _assignmentValidator.validate(titleMap, descriptionMap, dueDate);
+
         Assignment assignment = getAssignment(assignmentId);
+
         // Set updated fields and modification date.
         assignment.setModifiedDate(new Date());
         assignment.setTitleMap(titleMap);
         assignment.setDueDate(dueDate);
         assignment.setDescriptionMap(descriptionMap);
         assignment = super.updateAssignment(assignment);
+
         return assignment;
     }
 
-    public List<Assignment> getAssignmentsByGroupId(long groupId) {
+    public List<Assignment> getAssignmentsByGroupId(
+            long groupId
+    ) {
         return assignmentPersistence.findByGroupId(groupId);
     }
 
-    public List<Assignment> getAssignmentsByGroupId(long groupId, int start, int end) {
+    public List<Assignment> getAssignmentsByGroupId(
+            long groupId,
+            int start,
+            int end
+    ) {
         return assignmentPersistence.findByGroupId(groupId, start, end);
     }
 
-    public List<Assignment> getAssignmentsByGroupId(long groupId, int start, int end, OrderByComparator<Assignment> orderByComparator) {
+    public List<Assignment> getAssignmentsByGroupId(
+            long groupId,
+            int start,
+            int end,
+            OrderByComparator<Assignment> orderByComparator
+    ) {
         return assignmentPersistence.findByGroupId(groupId, start, end, orderByComparator);
     }
 
-    public List<Assignment> getAssignmentsByKeywords(long groupId, String keywords, int start, int end, OrderByComparator<Assignment> orderByComparator) {
+    public List<Assignment> getAssignmentsByKeywords(
+            long groupId,
+            String keywords,
+            int start,
+            int end,
+            OrderByComparator<Assignment> orderByComparator
+    ) {
         return assignmentLocalService.dynamicQuery(getKeywordSearchDynamicQuery(groupId, keywords), start, end, orderByComparator);
     }
 
-    public long getAssignmentsCountByKeywords(long groupId, String keywords) {
+    public long getAssignmentsCountByKeywords(
+            long groupId,
+            String keywords
+    ) {
         return assignmentLocalService.dynamicQueryCount(getKeywordSearchDynamicQuery(groupId, keywords));
     }
 
-    private DynamicQuery getKeywordSearchDynamicQuery(long groupId, String keywords) {
+    private DynamicQuery getKeywordSearchDynamicQuery(
+            long groupId,
+            String keywords
+    ) {
         DynamicQuery dynamicQuery = dynamicQuery().add(RestrictionsFactoryUtil.eq("groupId", groupId));
-
         if (Validator.isNotNull(keywords)) {
             Disjunction disjunctionQuery = RestrictionsFactoryUtil.disjunction();
             disjunctionQuery.add(RestrictionsFactoryUtil.like("title", "%" + keywords + "%"));
             disjunctionQuery.add(RestrictionsFactoryUtil.like("description", "%" + keywords + "%"));
             dynamicQuery.add(disjunctionQuery);
         }
-
         return dynamicQuery;
     }
 
     @Override
-    public Assignment addAssignment(Assignment assignment) {
+    public Assignment addAssignment(
+            Assignment assignment
+    ) {
         throw new UnsupportedOperationException("Not supported.");
     }
 
     @Override
-    public Assignment updateAssignment(Assignment assignment) {
+    public Assignment updateAssignment(
+            Assignment assignment
+    ) {
         throw new UnsupportedOperationException("Not supported.");
     }
+
+    @Reference
+    AssignmentValidator _assignmentValidator;
 }
