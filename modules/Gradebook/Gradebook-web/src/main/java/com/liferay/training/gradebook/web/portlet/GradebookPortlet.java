@@ -25,8 +25,10 @@ import org.osgi.service.component.annotations.Component;
 
                 "com.liferay.portlet.display-category=category.training",
                 "com.liferay.portlet.instanceable=false",
-                "javax.portlet.init-param.add-process-action-success-action=false"
+                "javax.portlet.init-param.add-process-action-success-action=false",
 
+                "com.liferay.portlet.css-class-wrapper=gradebook-portlet",
+                "com.liferay.portlet.header-portlet-css=/css/main.css",
         },
         service = Portlet.class)
 public class GradebookPortlet extends MVCPortlet {
