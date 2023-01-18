@@ -3,7 +3,6 @@
 <c:set var="assignment" value="${SEARCH_CONTAINER_RESULT_ROW.object}"/>
 
 <liferay-ui:icon-menu markupView="lexicon">
-
     <%-- View action. --%>
     <portlet:renderURL var="viewAssignmentURL">
         <portlet:param name="mvcRenderCommandName" value="<%=MVCCommandNames.VIEW_ASSIGNMENT %>"/>
@@ -29,5 +28,4 @@
     </portlet:actionURL>
 
     <liferay-ui:icon-delete url="${deleteAssignmentURL}"/>
-
 </liferay-ui:icon-menu>
