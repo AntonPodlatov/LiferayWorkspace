@@ -72,10 +72,8 @@ public class AddAssignmentMVCActionCommand extends BaseMVCActionCommand {
                     dueDate,
                     serviceContext
             );
-
             // Set the success message.
             SessionMessages.add(actionRequest, "assignmentAdded");
-
             sendRedirect(actionRequest, actionResponse);
         } catch (AssignmentValidationException ave) {
             // Get error messages from the service layer.

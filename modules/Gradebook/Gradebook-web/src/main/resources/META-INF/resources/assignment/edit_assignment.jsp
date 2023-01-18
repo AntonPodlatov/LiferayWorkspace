@@ -1,11 +1,12 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Anton Podlatov
-  Date: 17.01.2023
-  Time: 17:42
-  To change this template use File | Settings | File Templates.
---%>
-<%@ include file="/init.jsp" %>
+<%@ include file="../init.jsp" %>
+
+<liferay-ui:error key="serviceErrorDetails">
+    <liferay-ui:message key="error.assignment-service-error"
+                        arguments='<%= SessionErrors.get(request, "serviceErrorDetails") %>' />
+</liferay-ui:error>
+<liferay-ui:error key="assignmentTitleEmpty" message="error.assignment-title-empty" />
+<liferay-ui:error key="assignmentDescriptionEmpty" message="error.assignment-description-empty" />
+
 <%-- Generate add / edit action URL and set title. --%>
 <c:choose>
     <c:when test="${not empty assignment}">

@@ -1,9 +1,10 @@
-package com.liferay.training.gradebook.validator;
+package com.liferay.training.gradebook.validator.util;
 
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.training.gradebook.exception.AssignmentValidationException;
+import com.liferay.training.gradebook.validator.AssignmentValidator;
 import org.osgi.service.component.annotations.Component;
 
 import java.util.*;
@@ -28,6 +29,7 @@ public class AssignmentValidatorImpl implements AssignmentValidator {
             Date dueDate
     ) throws AssignmentValidationException {
         List<String> errors = new ArrayList<>();
+
         if (!isAssignmentValid(titleMap, descriptionMap, dueDate, errors)) {
             throw new AssignmentValidationException(errors);
         }

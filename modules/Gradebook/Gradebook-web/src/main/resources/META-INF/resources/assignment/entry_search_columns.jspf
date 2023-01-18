@@ -1,3 +1,4 @@
+
 <%-- Generate assignment view  URL. --%>
 <portlet:renderURL var="viewAssignmentURL">
     <portlet:param name="mvcRenderCommandName" value="<%=MVCCommandNames.VIEW_ASSIGNMENT %>"/>

@@ -1,4 +1,4 @@
-<%@ include file="/init.jsp"%>
+<%@ include file="../init.jsp" %>
 
 <div class="container-fluid-1280">
     <h1>${assignment.getTitle(locale)}</h1>
