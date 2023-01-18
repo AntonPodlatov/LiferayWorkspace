@@ -1,5 +1,6 @@
 <%@ include file="../init.jsp" %>
 
+<%-- Error messages. --%>
 <liferay-ui:error key="serviceErrorDetails">
     <liferay-ui:message key="error.assignment-service-error"
                         arguments='<%= SessionErrors.get(request, "serviceErrorDetails") %>' />
@@ -31,7 +32,19 @@
         <aui:input name="assignmentId" field="assignmentId" type="hidden"/>
         <aui:fieldset-group markupView="lexicon">
             <aui:fieldset>
-                <aui:input name="title"/>
+
+                <aui:input name="title">
+                    <aui:validator name="required" />
+
+                    <%-- Custom AUI validator. --%>
+                    <aui:validator errorMessage="error.assignment-title-format" name="custom">
+                                function(val, fieldNode, ruleValue) {
+                                    var wordExpression = new RegExp("^[^\\[\\]\\^$<>]*$");
+                                    return wordExpression.test(val);
+                                }
+                    </aui:validator>
+                </aui:input>
+
                 <aui:input name="description">
                     <aui:validator name="required"/>
                 </aui:input>
