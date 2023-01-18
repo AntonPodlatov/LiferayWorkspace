@@ -11,6 +11,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.training.gradebook.web.constants.GradebookPortletKeys;
 import com.liferay.training.gradebook.web.constants.MVCCommandNames;
+import com.liferay.training.gradebook.web.internal.security.permission.resource.AssignmentTopLevelPermission;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletURL;
@@ -44,13 +45,20 @@ public class AssignmentsManagementToolbarDisplayContext extends BaseManagementTo
      * @return creation menu
      */
     public CreationMenu getCreationMenu() {
+        // Check if user has permissions to add assignments.
+
+        if (!AssignmentTopLevelPermission.contains(
+                _themeDisplay.getPermissionChecker(),
+                _themeDisplay.getScopeGroupId(),
+                "ADD_ENTRY")
+        ) {
+            return null;
+        }
+
         // Create the menu.
         return new CreationMenu() {{
             addDropdownItem(dropdownItem -> {
-                dropdownItem.setHref(
-                        liferayPortletResponse.createRenderURL(),
-                        "mvcRenderCommandName", MVCCommandNames.EDIT_ASSIGNMENT,
-                        "redirect", currentURLObj.toString());
+                dropdownItem.setHref(liferayPortletResponse.createRenderURL(), "mvcRenderCommandName", MVCCommandNames.EDIT_ASSIGNMENT, "redirect", currentURLObj.toString());
                 dropdownItem.setLabel(LanguageUtil.get(request, "add-assignment"));
             });
         }};
@@ -65,6 +73,7 @@ public class AssignmentsManagementToolbarDisplayContext extends BaseManagementTo
      * Returns the assignment list display style.
      * <p>
      * Current selection is stored in portal preferences.
+     *
      * @return current display style
      */
     public String getDisplayStyle() {
@@ -82,6 +91,7 @@ public class AssignmentsManagementToolbarDisplayContext extends BaseManagementTo
 
     /**
      * Returns the sort order column.
+     *
      * @return sort column
      */
     public String getOrderByCol() {
@@ -90,6 +100,7 @@ public class AssignmentsManagementToolbarDisplayContext extends BaseManagementTo
 
     /**
      * Returns the sort type (ascending / descending).
+     *
      * @return sort type
      */
     public String getOrderByType() {
@@ -98,6 +109,7 @@ public class AssignmentsManagementToolbarDisplayContext extends BaseManagementTo
 
     /**
      * Returns the action URL for the search.
+     *
      * @return search action URL
      */
     @Override
