@@ -25,8 +25,8 @@ import javax.portlet.RenderResponse;
                 "mvc.command.name=" + MVCCommandNames.EDIT_ASSIGNMENT
         },
         service = MVCRenderCommand.class)
-public class EditAssignmentMVCRenderCommand implements MVCRenderCommand {
 
+public class EditAssignmentMVCRenderCommand implements MVCRenderCommand {
     @Override
     public String render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException {
         Assignment assignment = null;

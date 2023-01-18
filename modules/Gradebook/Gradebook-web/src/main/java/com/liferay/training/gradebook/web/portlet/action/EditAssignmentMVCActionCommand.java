@@ -37,51 +37,22 @@ import java.util.Map;
         service = MVCActionCommand.class
 )
 public class EditAssignmentMVCActionCommand extends BaseMVCActionCommand {
-
     @Override
-    protected void doProcessAction(
-            ActionRequest actionRequest, ActionResponse actionResponse)
-            throws Exception {
-
-        ServiceContext serviceContext =
-                ServiceContextFactory.getInstance(Assignment.class.getName(), actionRequest);
-
-        // Get parameters from the request.
-
+    protected void doProcessAction(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
+        ServiceContext serviceContext = ServiceContextFactory.getInstance(Assignment.class.getName(), actionRequest);
+        //Get parameters from the request.
         long assignmentId = ParamUtil.getLong(actionRequest, "assignmentId");
-
-        Map<Locale, String> titleMap =
-                LocalizationUtil.getLocalizationMap(actionRequest, "title");
-
+        Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(actionRequest, "title");
         Map<Locale, String> descriptionMap = LocalizationUtil.getLocalizationMap(actionRequest, "description");
-
-        Date dueDate = ParamUtil.getDate(
-                actionRequest, "dueDate",
-                DateFormatFactoryUtil.getDate(actionRequest.getLocale()));
+        Date dueDate = ParamUtil.getDate(actionRequest, "dueDate", DateFormatFactoryUtil.getDate(actionRequest.getLocale()));
 
         try {
-
-            // Call the service to update the assignment
-
-            _assignmentService.updateAssignment(
-                    assignmentId, titleMap, descriptionMap, dueDate, serviceContext);
-
+            //Call the service to update the assignment
+            _assignmentService.updateAssignment(assignmentId, titleMap, descriptionMap, dueDate, serviceContext);
             sendRedirect(actionRequest, actionResponse);
-        }
-        catch (AssignmentValidationException ave) {
-
-            ave.printStackTrace();
-
-            actionResponse.setRenderParameter(
-                    "mvcRenderCommandName", MVCCommandNames.EDIT_ASSIGNMENT);
-
-        }
-        catch (PortalException pe) {
-
-            pe.printStackTrace();
-
-            actionResponse.setRenderParameter(
-                    "mvcRenderCommandName", MVCCommandNames.EDIT_ASSIGNMENT);
+        } catch (PortalException e) {
+            e.printStackTrace();
+            actionResponse.setRenderParameter("mvcRenderCommandName", MVCCommandNames.EDIT_ASSIGNMENT);
         }
     }
 

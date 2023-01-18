@@ -10,7 +10,6 @@ import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.training.gradebook.exception.AssignmentValidationException;
 import com.liferay.training.gradebook.model.Assignment;
 import com.liferay.training.gradebook.service.AssignmentService;
 import com.liferay.training.gradebook.web.constants.GradebookPortletKeys;
@@ -29,61 +28,36 @@ import java.util.Map;
  *
  * @author liferay
  */
+
 @Component(
         immediate = true,
         property = {
                 "javax.portlet.name=" + GradebookPortletKeys.Gradebook,
                 "mvc.command.name=" + MVCCommandNames.ADD_ASSIGNMENT
         },
-        service = MVCActionCommand.class
-)
+        service = MVCActionCommand.class)
+
 public class AddAssignmentMVCActionCommand extends BaseMVCActionCommand {
-
     @Override
-    protected void doProcessAction(
-            ActionRequest actionRequest, ActionResponse actionResponse)
-            throws Exception {
-
-        ThemeDisplay themeDisplay =
-                (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
-
-        ServiceContext serviceContext = ServiceContextFactory.getInstance(
-                Assignment.class.getName(), actionRequest);
-
-        // Get parameters from the request.
-
-        // Use LocalizationUtil to get a localized parameter.
-
-        Map<Locale, String> titleMap =
-                LocalizationUtil.getLocalizationMap(actionRequest, "title");
-
-        Map<Locale, String> descriptionMap =
-                LocalizationUtil.getLocalizationMap(actionRequest, "description");
-
-        Date dueDate = ParamUtil.getDate(
-                actionRequest, "dueDate",
-                DateFormatFactoryUtil.getDate(actionRequest.getLocale()));
+    protected void doProcessAction(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
+        ThemeDisplay themeDisplay = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+        ServiceContext serviceContext = ServiceContextFactory.getInstance(Assignment.class.getName(), actionRequest);
+        //Get parameters from the request.
+        //Use LocalizationUtil to get a localized parameter.
+        Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(actionRequest, "title");
+        Map<Locale, String> descriptionMap = LocalizationUtil.getLocalizationMap(actionRequest, "description");
+        Date dueDate = ParamUtil.getDate(actionRequest, "dueDate", DateFormatFactoryUtil.getDate(actionRequest.getLocale()));
 
         try {
-
-            // Call the service to add a a new assignment.
-
-            _assignmentService.addAssignment(
-                    themeDisplay.getScopeGroupId(), titleMap, descriptionMap, dueDate,
-                    serviceContext);
-
+            //Call the service to add a new assignment.
+            _assignmentService.addAssignment(themeDisplay.getScopeGroupId(), titleMap, descriptionMap, dueDate, serviceContext);
             sendRedirect(actionRequest, actionResponse);
-        } catch (PortalException ave) {
-
-            ave.printStackTrace();
-
-            actionResponse.setRenderParameter(
-                    "mvcRenderCommandName", MVCCommandNames.EDIT_ASSIGNMENT);
-
+        } catch (PortalException e) {
+            e.printStackTrace();
+            actionResponse.setRenderParameter("mvcRenderCommandName", MVCCommandNames.EDIT_ASSIGNMENT);
         }
     }
 
     @Reference
     protected AssignmentService _assignmentService;
-
 }

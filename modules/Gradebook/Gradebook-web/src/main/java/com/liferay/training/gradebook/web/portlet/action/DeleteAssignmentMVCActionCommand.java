@@ -7,12 +7,11 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.training.gradebook.service.AssignmentService;
 import com.liferay.training.gradebook.web.constants.GradebookPortletKeys;
 import com.liferay.training.gradebook.web.constants.MVCCommandNames;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
-
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 /**
  * MVC Action Command for deleting assignments.
@@ -25,30 +24,19 @@ import org.osgi.service.component.annotations.Reference;
                 "javax.portlet.name=" + GradebookPortletKeys.Gradebook,
                 "mvc.command.name=" + MVCCommandNames.DELETE_ASSIGNMENT
         },
-        service = MVCActionCommand.class
-)
+        service = MVCActionCommand.class)
+
 public class DeleteAssignmentMVCActionCommand extends BaseMVCActionCommand {
-
     @Override
-    protected void doProcessAction(
-            ActionRequest actionRequest, ActionResponse actionResponse)
-            throws Exception {
-
-        // Get assignment id from request.
-
+    protected void doProcessAction(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
+        //Get assignment id from request.
         long assignmentId = ParamUtil.getLong(actionRequest, "assignmentId");
-
         try {
-
-            // Call service to delete the assignment.
-
+            //Call service to delete the assignment.
             _assignmentService.deleteAssignment(assignmentId);
-
-        }
-        catch (PortalException pe) {
+        } catch (PortalException pe) {
             pe.printStackTrace();
         }
-
     }
 
     @Reference
