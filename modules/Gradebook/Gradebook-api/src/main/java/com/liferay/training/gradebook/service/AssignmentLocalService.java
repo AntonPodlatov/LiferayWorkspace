@@ -96,12 +96,6 @@ public interface AssignmentLocalService
 	public Assignment createAssignment(long assignmentId);
 
 	/**
-	 * @throws PortalException
-	 */
-	public PersistedModel createPersistedModel(Serializable primaryKeyObj)
-		throws PortalException;
-
-	/**
 	 * Deletes the assignment from the database. Also notifies the appropriate model listeners.
 	 *
 	 * <p>

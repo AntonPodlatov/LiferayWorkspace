@@ -61,10 +61,8 @@ import java.util.Map;
  *
  * @author Brian Wing Shun Chan
  * @see AssignmentServiceHttp
- * @deprecated As of Athanasius (7.3.x), with no direct replacement
  * @generated
  */
-@Deprecated
 public class AssignmentServiceSoap {
 
 	public static com.liferay.training.gradebook.model.AssignmentSoap
