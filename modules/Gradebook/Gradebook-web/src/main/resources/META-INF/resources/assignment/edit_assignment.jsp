@@ -3,10 +3,10 @@
 <%-- Error messages. --%>
 <liferay-ui:error key="serviceErrorDetails">
     <liferay-ui:message key="error.assignment-service-error"
-                        arguments='<%= SessionErrors.get(request, "serviceErrorDetails") %>' />
+                        arguments='<%= SessionErrors.get(request, "serviceErrorDetails") %>'/>
 </liferay-ui:error>
-<liferay-ui:error key="assignmentTitleEmpty" message="error.assignment-title-empty" />
-<liferay-ui:error key="assignmentDescriptionEmpty" message="error.assignment-description-empty" />
+<liferay-ui:error key="assignmentTitleEmpty" message="error.assignment-title-empty"/>
+<liferay-ui:error key="assignmentDescriptionEmpty" message="error.assignment-description-empty"/>
 
 <%-- Generate add / edit action URL and set title. --%>
 <c:choose>
@@ -34,14 +34,11 @@
             <aui:fieldset>
 
                 <aui:input name="title">
-                    <aui:validator name="required" />
+                    <aui:validator name="required"/>
 
                     <%-- Custom AUI validator. --%>
                     <aui:validator errorMessage="error.assignment-title-format" name="custom">
-                                function(val, fieldNode, ruleValue) {
-                                    var wordExpression = new RegExp("^[^\\[\\]\\^$<>]*$");
-                                    return wordExpression.test(val);
-                                }
+                                (val, fieldNode, ruleValue) => new RegExp("^[^\\[\\]\\^$<>]*$").test(val)
                     </aui:validator>
                 </aui:input>
 
