@@ -72,6 +72,7 @@ public class AssignmentAssetRenderer extends BaseJSPAssetRenderer<Assignment> {
         if (template.equals(TEMPLATE_ABSTRACT) || template.equals(TEMPLATE_FULL_CONTENT)) {
             return "/asset/" + template + ".jsp";
         }
+
         return null;
     }
 
@@ -85,12 +86,14 @@ public class AssignmentAssetRenderer extends BaseJSPAssetRenderer<Assignment> {
             PortletRequest portletRequest,
             PortletResponse portletResponse
     ) {
-        ThemeDisplay themeDisplay = (ThemeDisplay) portletRequest.getAttribute(WebKeys.THEME_DISPLAY);
-        int abstractLength = AssetHelper.ASSET_ENTRY_ABSTRACT_LENGTH;
-        String summary = HtmlUtil.stripHtml(StringUtil.shorten(
-                _assignment.getDescription(themeDisplay.getLocale()), abstractLength));
+        ThemeDisplay themeDisplay = (ThemeDisplay) portletRequest
+                .getAttribute(WebKeys.THEME_DISPLAY);
 
-        return summary;
+        int abstractLength = AssetHelper.ASSET_ENTRY_ABSTRACT_LENGTH;
+
+        return HtmlUtil.stripHtml(StringUtil.shorten(
+                _assignment.getDescription(themeDisplay.getLocale()),
+                abstractLength));
     }
 
     @Override
@@ -101,18 +104,26 @@ public class AssignmentAssetRenderer extends BaseJSPAssetRenderer<Assignment> {
     @Override
     public PortletURL getURLEdit(
             LiferayPortletRequest liferayPortletRequest,
-            LiferayPortletResponse liferayPortletResponse)
-            throws Exception {
-        Group group = GroupLocalServiceUtil.fetchGroup(_assignment.getGroupId());
+            LiferayPortletResponse liferayPortletResponse
+    ) throws Exception {
+        Group group = GroupLocalServiceUtil
+                .fetchGroup(_assignment.getGroupId());
+
         if (group.isCompany()) {
-            ThemeDisplay themeDisplay =
-                    (ThemeDisplay) liferayPortletRequest.getAttribute(WebKeys.THEME_DISPLAY);
+            ThemeDisplay themeDisplay = (ThemeDisplay) liferayPortletRequest
+                    .getAttribute(WebKeys.THEME_DISPLAY);
+
             group = themeDisplay.getScopeGroup();
         }
 
-        PortletURL portletURL = PortalUtil.getControlPanelPortletURL(
-                liferayPortletRequest, group, GradebookPortletKeys.Gradebook, 0, 0,
-                PortletRequest.RENDER_PHASE);
+        PortletURL portletURL = PortalUtil
+                .getControlPanelPortletURL(
+                        liferayPortletRequest,
+                        group,
+                        GradebookPortletKeys.Gradebook,
+                        0,
+                        0,
+                        PortletRequest.RENDER_PHASE);
 
         portletURL.setParameter("mvcRenderCommandName", MVCCommandNames.EDIT_ASSIGNMENT);
         portletURL.setParameter("assignmentId", String.valueOf(_assignment.getAssignmentId()));
@@ -138,8 +149,7 @@ public class AssignmentAssetRenderer extends BaseJSPAssetRenderer<Assignment> {
     ) throws Exception {
         if (_assetDisplayPageFriendlyURLProvider != null) {
             ThemeDisplay themeDisplay = (ThemeDisplay) liferayPortletRequest
-                    .getAttribute(
-                            WebKeys.THEME_DISPLAY);
+                    .getAttribute(WebKeys.THEME_DISPLAY);
 
             String friendlyURL = _assetDisplayPageFriendlyURLProvider
                     .getFriendlyURL(
@@ -153,12 +163,16 @@ public class AssignmentAssetRenderer extends BaseJSPAssetRenderer<Assignment> {
         }
 
         try {
-            long plid = PortalUtil.getPlidFromPortletId(_assignment.getGroupId(), GradebookPortletKeys.Gradebook);
+            long plid = PortalUtil
+                    .getPlidFromPortletId(
+                            _assignment.getGroupId(),
+                            GradebookPortletKeys.Gradebook);
+
             PortletURL portletURL;
 
             if (plid == LayoutConstants.DEFAULT_PLID) {
-                portletURL = liferayPortletResponse
-                        .createLiferayPortletURL(
+                portletURL = liferayPortletResponse.
+                        createLiferayPortletURL(
                                 getControlPanelPlid(liferayPortletRequest),
                                 GradebookPortletKeys.Gradebook,
                                 PortletRequest.RENDER_PHASE);
@@ -174,10 +188,9 @@ public class AssignmentAssetRenderer extends BaseJSPAssetRenderer<Assignment> {
 
             portletURL.setParameter("mvcRenderCommandName", MVCCommandNames.VIEW_ASSIGNMENT);
             portletURL.setParameter("assignmentId", String.valueOf(_assignment.getAssignmentId()));
-
             String currentUrl = PortalUtil.getCurrentURL(liferayPortletRequest);
-            portletURL.setParameter("redirect", currentUrl);
 
+            portletURL.setParameter("redirect", currentUrl);
             return portletURL.toString();
         } catch (PortalException pe) {
         } catch (SystemException se) {
@@ -202,33 +215,32 @@ public class AssignmentAssetRenderer extends BaseJSPAssetRenderer<Assignment> {
     }
 
     @Override
-    public boolean hasEditPermission(PermissionChecker permissionChecker) throws PortalException {
-        return AssignmentPermission
-                .contains(permissionChecker, _assignment, ActionKeys.UPDATE);
+    public boolean hasEditPermission(PermissionChecker permissionChecker)
+            throws PortalException {
+        return AssignmentPermission.contains(permissionChecker, _assignment, ActionKeys.UPDATE);
     }
 
     @Override
-    public boolean hasViewPermission(PermissionChecker permissionChecker) throws PortalException {
-        return AssignmentPermission
-                .contains(permissionChecker, _assignment, ActionKeys.VIEW);
+    public boolean hasViewPermission(PermissionChecker permissionChecker)
+            throws PortalException {
+        return AssignmentPermission.contains(permissionChecker, _assignment, ActionKeys.VIEW);
     }
 
     @Override
     public boolean include(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            String template
-    ) throws Exception {
+            HttpServletRequest request, HttpServletResponse response,
+            String template)
+            throws Exception {
         request.setAttribute("assignment", _assignment);
         return super.include(request, response, template);
     }
 
     public void setAssetDisplayPageFriendlyURLProvider(
-            AssetDisplayPageFriendlyURLProvider assetDisplayPageFriendlyURLProvider
-    ) {
+            AssetDisplayPageFriendlyURLProvider assetDisplayPageFriendlyURLProvider) {
         _assetDisplayPageFriendlyURLProvider = assetDisplayPageFriendlyURLProvider;
     }
 
     private AssetDisplayPageFriendlyURLProvider _assetDisplayPageFriendlyURLProvider;
+
     private Assignment _assignment;
 }

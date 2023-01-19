@@ -13,20 +13,19 @@
 <%@ taglib prefix="liferay-theme" uri="http://liferay.com/tld/theme" %>
 <%@ taglib prefix="liferay-ui" uri="http://liferay.com/tld/ui" %>
 
-<%@ page import="javax.portlet.WindowState"%>
-<%@ page import="java.util.Date"%>
+<%@ page import="javax.portlet.WindowState" %>
+<%@ page import="java.util.Date" %>
 
-<%@ page import="com.liferay.training.gradebook.web.constants.MVCCommandNames"%>
-<%@ page import="com.liferay.portal.kernel.portlet.LiferayPortletRequest"%>
-<%@ page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
+<%@ page import="com.liferay.training.gradebook.web.constants.MVCCommandNames" %>
+<%@ page import="com.liferay.portal.kernel.portlet.LiferayPortletRequest" %>
+<%@ page import="com.liferay.portal.kernel.portlet.LiferayWindowState" %>
 <%@ page import="com.liferay.portal.kernel.servlet.SessionErrors" %>
-<%@ page import="com.liferay.portal.kernel.language.LanguageUtil"%>
-<%@ page import="com.liferay.training.gradebook.model.Assignment"%>
-<%@ page import="com.liferay.asset.kernel.model.AssetRenderer"%>
-<%@ page import="com.liferay.portal.kernel.util.HtmlUtil"%>
-<%@ page import="com.liferay.portal.kernel.util.WebKeys"%>
+<%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
+<%@ page import="com.liferay.training.gradebook.model.Assignment" %>
+<%@ page import="com.liferay.asset.kernel.model.AssetRenderer" %>
+<%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 
-
-<liferay-frontend:defineObjects />
-<liferay-theme:defineObjects />
-<portlet:defineObjects />
+<liferay-frontend:defineObjects/>
+<liferay-theme:defineObjects/>
+<portlet:defineObjects/>

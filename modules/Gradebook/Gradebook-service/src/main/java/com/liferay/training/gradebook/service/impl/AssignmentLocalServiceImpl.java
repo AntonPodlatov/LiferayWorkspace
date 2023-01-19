@@ -193,14 +193,17 @@ public class AssignmentLocalServiceImpl extends AssignmentLocalServiceBaseImpl {
         resourceLocalService.deleteResource(assignment, ResourceConstants.SCOPE_INDIVIDUAL);
 
         // Delete the Asset resource.
-
         assetEntryLocalService.deleteEntry(
                 Assignment.class.getName(), assignment.getAssignmentId());
+
         // Delete the Assignment
         return super.deleteAssignment(assignment);
     }
 
-    private void updateAsset(Assignment assignment, ServiceContext serviceContext) throws PortalException {
+    private void updateAsset(
+            Assignment assignment,
+            ServiceContext serviceContext
+    ) throws PortalException {
         assetEntryLocalService.updateEntry(
                 serviceContext.getUserId(),
                 serviceContext.getScopeGroupId(),

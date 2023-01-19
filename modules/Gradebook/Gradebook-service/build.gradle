@@ -11,6 +11,9 @@ dependencies {
     compileOnly project(":modules:Gradebook:Gradebook-api")
     compileOnly 'com.liferay.portal:com.liferay.portal.kernel'
     compileOnly group: "com.liferay", name: "com.liferay.petra.sql.dsl.api"
+
+    compileOnly group: "com.liferay", name: "com.liferay.portal.search.spi"
+    compileOnly group: "com.liferay", name: "com.liferay.portal.search.api"
 }
 
 buildService { apiDir = "../Gradebook-api/src/main/java" }
