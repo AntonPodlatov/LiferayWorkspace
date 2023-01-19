@@ -37,13 +37,10 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
         immediate = true,
         property = "javax.portlet.name=" + GradebookPortletKeys.Gradebook,
-        service = AssetRendererFactory.class
-)
-public class AssignmentAssetRendererFactory
-        extends BaseAssetRendererFactory<Assignment> {
+        service = AssetRendererFactory.class)
 
+public class AssignmentAssetRendererFactory extends BaseAssetRendererFactory<Assignment> {
     public static final String CLASS_NAME = Assignment.class.getName();
-
     public static final String TYPE = "assignment";
 
     public AssignmentAssetRendererFactory() {
@@ -54,20 +51,12 @@ public class AssignmentAssetRendererFactory
     }
 
     @Override
-    public AssetRenderer<Assignment> getAssetRenderer(long classPK, int type)
-            throws PortalException {
-
+    public AssetRenderer<Assignment> getAssetRenderer(long classPK, int type) throws PortalException {
         Assignment assignment = _assignmentLocalService.getAssignment(classPK);
-
-        AssignmentAssetRenderer assignmentAssetRenderer =
-                new AssignmentAssetRenderer(
-                        assignment);
-
-        assignmentAssetRenderer.setAssetDisplayPageFriendlyURLProvider(
-                _assetDisplayPageFriendlyURLProvider);
+        AssignmentAssetRenderer assignmentAssetRenderer = new AssignmentAssetRenderer(assignment);
+        assignmentAssetRenderer.setAssetDisplayPageFriendlyURLProvider(_assetDisplayPageFriendlyURLProvider);
         assignmentAssetRenderer.setAssetRendererType(type);
         assignmentAssetRenderer.setServletContext(_servletContext);
-
         return assignmentAssetRenderer;
     }
 
@@ -79,22 +68,21 @@ public class AssignmentAssetRendererFactory
     @Override
     public PortletURL getURLAdd(
             LiferayPortletRequest liferayPortletRequest,
-            LiferayPortletResponse liferayPortletResponse, long classTypeId) {
-
+            LiferayPortletResponse liferayPortletResponse,
+            long classTypeId
+    ) {
         PortletURL portletURL = _portal.getControlPanelPortletURL(
                 liferayPortletRequest, getGroup(liferayPortletRequest),
                 GradebookPortletKeys.Gradebook, 0, 0, PortletRequest.RENDER_PHASE);
-
         portletURL.setParameter("mvcRenderCommandName", MVCCommandNames.EDIT_ASSIGNMENT);
-
         return portletURL;
     }
 
     @Override
     public PortletURL getURLView(
             LiferayPortletResponse liferayPortletResponse,
-            WindowState windowState) {
-
+            WindowState windowState
+    ) {
         LiferayPortletURL liferayPortletURL =
                 liferayPortletResponse.createLiferayPortletURL(
                         GradebookPortletKeys.Gradebook, PortletRequest.RENDER_PHASE);
@@ -110,49 +98,43 @@ public class AssignmentAssetRendererFactory
 
     @Override
     public boolean hasAddPermission(
-            PermissionChecker permissionChecker, long groupId, long classTypeId)
-            throws Exception {
-
-        return _portletResourcePermission.contains(
-                permissionChecker, groupId, ActionKeys.ADD_ENTRY);
+            PermissionChecker permissionChecker,
+            long groupId,
+            long classTypeId
+    ) throws Exception {
+        return _portletResourcePermission
+                .contains(permissionChecker, groupId, ActionKeys.ADD_ENTRY);
     }
 
     @Override
     public boolean hasPermission(
-            PermissionChecker permissionChecker, long classPK, String actionId)
-            throws Exception {
-
-        return _assignmentModelResourcePermission.contains(
-                permissionChecker, classPK, actionId);
+            PermissionChecker permissionChecker,
+            long classPK,
+            String actionId
+    ) throws Exception {
+        return _assignmentModelResourcePermission
+                .contains(permissionChecker, classPK, actionId);
     }
 
     @Reference
-    private AssetDisplayPageFriendlyURLProvider
-            _assetDisplayPageFriendlyURLProvider;
+    private AssetDisplayPageFriendlyURLProvider _assetDisplayPageFriendlyURLProvider;
 
     @Reference
     private AssignmentLocalService _assignmentLocalService;
 
-    @Reference(
-            target = "(model.class.name=com.liferay.training.gradebook.model.Assignment)"
-    )
-    private ModelResourcePermission<Assignment>
-            _assignmentModelResourcePermission;
+    @Reference(target = "(model.class.name=com.liferay.training.gradebook.model.Assignment)")
+    private ModelResourcePermission<Assignment> _assignmentModelResourcePermission;
 
     @Reference
     private Portal _portal;
 
-    @Reference(
-            target = "(resource.name=" + GradebookConstants.RESOURCE_NAME + ")"
-    )
+    @Reference(target = "(resource.name=" + GradebookConstants.RESOURCE_NAME + ")")
     private PortletResourcePermission _portletResourcePermission;
 
     @Reference
     private PortletURLFactory _portletURLFactory;
 
-    @Reference(
-            target = "(osgi.web.symbolicname=com.liferay.training.gradebook.web)"
-    )
+    @Reference(target = "(osgi.web.symbolicname=com.liferay.training.gradebook.web)")
     private ServletContext _servletContext;
 
 }
