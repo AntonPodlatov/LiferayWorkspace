@@ -65,7 +65,10 @@ public class AssignmentAssetRenderer extends BaseJSPAssetRenderer<Assignment> {
     }
 
     @Override
-    public String getJspPath(HttpServletRequest request, String template) {
+    public String getJspPath(
+            HttpServletRequest request,
+            String template
+    ) {
         if (template.equals(TEMPLATE_ABSTRACT) || template.equals(TEMPLATE_FULL_CONTENT)) {
             return "/asset/" + template + ".jsp";
         }
@@ -85,7 +88,7 @@ public class AssignmentAssetRenderer extends BaseJSPAssetRenderer<Assignment> {
         ThemeDisplay themeDisplay = (ThemeDisplay) portletRequest.getAttribute(WebKeys.THEME_DISPLAY);
         int abstractLength = AssetHelper.ASSET_ENTRY_ABSTRACT_LENGTH;
         String summary = HtmlUtil.stripHtml(StringUtil.shorten(
-                        _assignment.getDescription(themeDisplay.getLocale()), abstractLength));
+                _assignment.getDescription(themeDisplay.getLocale()), abstractLength));
 
         return summary;
     }
@@ -131,17 +134,18 @@ public class AssignmentAssetRenderer extends BaseJSPAssetRenderer<Assignment> {
     public String getURLViewInContext(
             LiferayPortletRequest liferayPortletRequest,
             LiferayPortletResponse liferayPortletResponse,
-            String noSuchEntryRedirect)
-            throws Exception {
-
+            String noSuchEntryRedirect
+    ) throws Exception {
         if (_assetDisplayPageFriendlyURLProvider != null) {
-            ThemeDisplay themeDisplay =
-                    (ThemeDisplay) liferayPortletRequest.getAttribute(
+            ThemeDisplay themeDisplay = (ThemeDisplay) liferayPortletRequest
+                    .getAttribute(
                             WebKeys.THEME_DISPLAY);
 
-            String friendlyURL =
-                    _assetDisplayPageFriendlyURLProvider.getFriendlyURL(
-                            getClassName(), getClassPK(), themeDisplay);
+            String friendlyURL = _assetDisplayPageFriendlyURLProvider
+                    .getFriendlyURL(
+                            getClassName(),
+                            getClassPK(),
+                            themeDisplay);
 
             if (Validator.isNotNull(friendlyURL)) {
                 return friendlyURL;
@@ -149,35 +153,29 @@ public class AssignmentAssetRenderer extends BaseJSPAssetRenderer<Assignment> {
         }
 
         try {
-            long plid = PortalUtil.getPlidFromPortletId(
-                    _assignment.getGroupId(), GradebookPortletKeys.Gradebook
-            );
-
+            long plid = PortalUtil.getPlidFromPortletId(_assignment.getGroupId(), GradebookPortletKeys.Gradebook);
             PortletURL portletURL;
 
             if (plid == LayoutConstants.DEFAULT_PLID) {
-                portletURL = liferayPortletResponse.createLiferayPortletURL(
-                        getControlPanelPlid(liferayPortletRequest),
-                        GradebookPortletKeys.Gradebook,
-                        PortletRequest.RENDER_PHASE);
+                portletURL = liferayPortletResponse
+                        .createLiferayPortletURL(
+                                getControlPanelPlid(liferayPortletRequest),
+                                GradebookPortletKeys.Gradebook,
+                                PortletRequest.RENDER_PHASE);
             } else {
-                portletURL =
-                        PortletURLFactoryUtil.getPortletURLFactory(
-                        ).create(
-                                liferayPortletRequest, GradebookPortletKeys.Gradebook,
-                                plid, PortletRequest.RENDER_PHASE
-                        );
+                portletURL = PortletURLFactoryUtil
+                        .getPortletURLFactory()
+                        .create(
+                                liferayPortletRequest,
+                                GradebookPortletKeys.Gradebook,
+                                plid,
+                                PortletRequest.RENDER_PHASE);
             }
 
-            portletURL.setParameter(
-                    "mvcRenderCommandName", MVCCommandNames.VIEW_ASSIGNMENT);
-            portletURL.setParameter(
-                    "assignmentId", String.valueOf(_assignment.getAssignmentId()));
+            portletURL.setParameter("mvcRenderCommandName", MVCCommandNames.VIEW_ASSIGNMENT);
+            portletURL.setParameter("assignmentId", String.valueOf(_assignment.getAssignmentId()));
 
-            String currentUrl = PortalUtil.getCurrentURL(
-                    liferayPortletRequest
-            );
-
+            String currentUrl = PortalUtil.getCurrentURL(liferayPortletRequest);
             portletURL.setParameter("redirect", currentUrl);
 
             return portletURL.toString();
